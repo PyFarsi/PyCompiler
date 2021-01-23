@@ -48,7 +48,11 @@ def analyze_result(dic: dict, v, is_fa: bool, cid, code, really_cid) -> str:
 
 *نتیجه : * 
 `{}`
-""".format(3 if v!=5 else 2, f'[{cid}](tg://user?id={really_cid})', code if len(code) < 500 else 'Telegram limit', result_code)
+
+---------------
+
+`{}`
+""".format(3 if v!=5 else 2, f'[{cid}](tg://user?id={really_cid})', code if len(code) < 500 else 'Telegram limit', result_code, stats)
         return msg
     else:
         result_code = dic['Result']
@@ -62,5 +66,9 @@ def analyze_result(dic: dict, v, is_fa: bool, cid, code, really_cid) -> str:
 
 *نتیجه : * 
 `{}`
-""".format(3 if v!=5 else 2, f'[{cid}](tg://user?id={really_cid})', code if len(code) < 500 else 'Telegram limit', result_code)
+
+---------------
+
+`{}`
+""".format(3 if v!=5 else 2, f'[{cid}](tg://user?id={really_cid})', code if len(code) < 500 else 'Telegram limit', result_code, stats)
         return msg
