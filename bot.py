@@ -2,7 +2,7 @@
 import os
 import json
 
-from api import RextesterApi
+from src.api import RextesterApi
 
 import telegram
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
