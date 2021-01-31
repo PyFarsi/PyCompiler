@@ -34,12 +34,14 @@ def get_code(bot, update):
 
 
 def callback_result(message, code, msg_reply, cid, really_cid):
-    if "import os" in code:
+    if "import os" in code and ('اوکی, لطفا کدی که به زبان' in msg_reply) and '.' not in msg_reply:
         message.reply_text("استفاده از کتابخانه os مجاز نیست.")
-    elif '2' in msg_reply:
-        message.reply_text(rex.rextester_api(5, code, cid, really_cid), parse_mode=telegram.ParseMode.MARKDOWN)
-    elif '3' in msg_reply:
-        message.reply_text(rex.rextester_api(24, code, cid, really_cid), parse_mode=telegram.ParseMode.MARKDOWN)
+        
+    if msg_reply:
+        if 'پایتون 2' in msg_reply and ('اوکی, لطفا کدی که به زبان' in msg_reply) and '.' not in msg_reply:
+            message.reply_text(rex.rextester_api(5, code, cid, really_cid), parse_mode=telegram.ParseMode.MARKDOWN)
+        elif 'پایتون 3' in msg_reply and ('اوکی, لطفا کدی که به زبان' in msg_reply) and '.' not in msg_reply:
+            message.reply_text(rex.rextester_api(24, code, cid, really_cid), parse_mode=telegram.ParseMode.MARKDOWN)
 
 
 def get_settings():
