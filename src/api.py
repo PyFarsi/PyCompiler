@@ -37,7 +37,8 @@ class RextesterApi:
         """
 
     def rextester_api(self, lang_id: int, code: str, uid: str, username: str):
-        resp = get(f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}&Program={code}").json()
+        resp = get(
+            f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}&Program={code}").json()
 
         """Response List"""
         errors = resp['Errors']
@@ -61,13 +62,15 @@ class RextesterApi:
         if errors is not None:
             return self.__message(lang,
                                   f"[{uid}](tg://user?id={username})",
-                                  code if len(code) < 500 else 'Telegram limited character size',
+                                  code if len(
+                                      code) < 500 else 'Telegram limited character size',
                                   errors,
                                   stats
                                   )
         return self.__message(lang,
                               f"[{uid}](tg://user?id={username})",
-                              code if len(code) < 500 else 'Telegram limited character size',
+                              code if len(
+                                  code) < 500 else 'Telegram limited character size',
                               result,
                               stats
                               )
