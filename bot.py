@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-import os
 import json
-
-from src.logger import Logger
-from src.api import RextesterApi
+import os
 
 import telegram
-from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+
+from src.api import RextesterApi
+from src.logger import Logger
 
 rex = RextesterApi()
 log = Logger()
