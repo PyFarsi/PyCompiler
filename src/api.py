@@ -23,9 +23,8 @@ class RextesterApi:
         return code
 
     @staticmethod
-    def __message(
-        interpreter: str, user: str, code: str, result: str, stats: str
-    ) -> str:
+    def __message(interpreter: str, user: str, code: str, result: str,
+                  stats: str) -> str:
         return f"""
 *زبان :* {interpreter}
 *کاربر :* {user}\n
@@ -41,7 +40,6 @@ class RextesterApi:
         resp = get(
             f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}&Program={code}"
         ).json()
-
         """Response List"""
         errors = resp["Errors"]
         result = resp["Result"]

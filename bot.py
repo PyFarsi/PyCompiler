@@ -61,64 +61,47 @@ def get_code(bot, update):
 
 
 def callback_result(message, code, msg_reply, cid, really_cid):
-    if (
-        "import os" in code
-        and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-        and "." not in msg_reply
-    ):
+    if ("import os" in code and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+            and "." not in msg_reply):
         message.reply_text("استفاده از کتابخانه os مجاز نیست.")
 
     if msg_reply:
-        if (
-            "C" in msg_reply
-            and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-            and "." not in msg_reply
-        ):
+        if ("C" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+                and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(6, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
-        elif (
-            "C++" in msg_reply
-            and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-            and "." not in msg_reply
-        ):
+        elif ("C++" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+              and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(7, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
-        elif (
-            "MySQL" in msg_reply
-            and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-            and "." not in msg_reply
-        ):
+        elif ("MySQL" in msg_reply
+              and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+              and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(33, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
-        elif (
-            "SQL Server" in msg_reply
-            and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-            and "." not in msg_reply
-        ):
+        elif ("SQL Server" in msg_reply
+              and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+              and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(16, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
-        elif (
-            "PostgreSQL" in msg_reply
-            and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-            and "." not in msg_reply
-        ):
+        elif ("PostgreSQL" in msg_reply
+              and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+              and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(34, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
-        elif (
-            "Python 3" in msg_reply
-            and ("اوکی, لطفا کدی که به زبان" in msg_reply)
-            and "." not in msg_reply
-        ):
+        elif ("Python 3" in msg_reply
+              and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+              and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(24, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
@@ -144,7 +127,9 @@ if __name__ == "__main__":
         updater = Updater(
             settings["token"],
             use_context=True,
-            request_kwargs={"proxy_url": f"socks5h://{settings['proxy_address']}"},
+            request_kwargs={
+                "proxy_url": f"socks5h://{settings['proxy_address']}"
+            },
         )
     else:
         updater = Updater(settings["token"], use_context=True)
@@ -153,13 +138,13 @@ if __name__ == "__main__":
         MessageHandler(
             filters=(Filters.chat_type.groups & Filters.text & Filters.reply),
             callback=get_code,
-        )
-    )
+        ))
     dp.add_handler(CommandHandler("py", python3, Filters.chat_type.groups))
     dp.add_handler(CommandHandler("c", clang, Filters.chat_type.groups))
     dp.add_handler(CommandHandler("cpp", cpplang, Filters.chat_type.groups))
     dp.add_handler(CommandHandler("mysql", mysql, Filters.chat_type.groups))
-    dp.add_handler(CommandHandler("sqlsv", sql_server, Filters.chat_type.groups))
+    dp.add_handler(
+        CommandHandler("sqlsv", sql_server, Filters.chat_type.groups))
     dp.add_handler(CommandHandler("psql", psql, Filters.chat_type.groups))
     updater.start_polling()
     updater.idle()
