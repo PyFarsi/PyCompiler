@@ -3,7 +3,10 @@ import json
 import os
 
 import telegram
-from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+from telegram.ext import CommandHandler
+from telegram.ext import Filters
+from telegram.ext import MessageHandler
+from telegram.ext import Updater
 
 from src.api import RextesterApi
 from src.logger import Logger
