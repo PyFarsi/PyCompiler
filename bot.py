@@ -80,9 +80,7 @@ def get_settings():
             "proxy": setting['proxy'],
             "proxy_address": setting['proxy_address']
         }
-
-    else:
-        raise Exception("setting.json not found.")
+    raise Exception("setting.json not found.")
 
 
 if __name__ == '__main__':

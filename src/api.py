@@ -65,10 +65,9 @@ class RextesterApi:
                                   errors,
                                   stats
                                   )
-        else:
-            return self.__message(lang,
-                                  f"[{uid}](tg://user?id={username})",
-                                  code if len(code) < 500 else 'Telegram limited character size',
-                                  result,
-                                  stats
-                                  )
+        return self.__message(lang,
+                              f"[{uid}](tg://user?id={username})",
+                              code if len(code) < 500 else 'Telegram limited character size',
+                              result,
+                              stats
+                              )
