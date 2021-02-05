@@ -11,12 +11,11 @@ STATS_ITEMS = (
     ("rows selected", "ردیف های انتخاب شده"),
     ("rows affected", "ردیف های تحت تاثیر"),
     ("sec", "ثانیه"),
-    (", ", "\n> ")
+    (", ", "\n> "),
 )
 
 
 class RextesterApi:
-
     @staticmethod
     def __replace(code: str):
         for rep in STATS_ITEMS:
@@ -24,7 +23,8 @@ class RextesterApi:
         return code
 
     @staticmethod
-    def __message(interpreter: str, user: str, code: str, result: str, stats: str) -> str:
+    def __message(interpreter: str, user: str, code: str, result: str,
+                  stats: str) -> str:
         return f"""
 *زبان :* {interpreter}
 *کاربر :* {user}\n
@@ -37,11 +37,12 @@ class RextesterApi:
         """
 
     def rextester_api(self, lang_id: int, code: str, uid: str, username: str):
-        resp = get(f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}&Program={code}").json()
-
+        resp = get(
+            f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}&Program={code}"
+        ).json()
         """Response List"""
-        errors = resp['Errors']
-        result = resp['Result']
+        errors = resp["Errors"]
+        result = resp["Result"]
         stats = f"> {self.__replace(resp['Stats'])}"
 
         lang = None
@@ -59,15 +60,17 @@ class RextesterApi:
             lang = "Python 3"
 
         if errors is not None:
-            return self.__message(lang,
-                                  f"[{uid}](tg://user?id={username})",
-                                  code if len(code) < 500 else 'Telegram limited character size',
-                                  errors,
-                                  stats
-                                  )
-        return self.__message(lang,
-                              f"[{uid}](tg://user?id={username})",
-                              code if len(code) < 500 else 'Telegram limited character size',
-                              result,
-                              stats
-                              )
+            return self.__message(
+                lang,
+                f"[{uid}](tg://user?id={username})",
+                code if len(code) < 500 else "Telegram limited character size",
+                errors,
+                stats,
+            )
+        return self.__message(
+            lang,
+            f"[{uid}](tg://user?id={username})",
+            code if len(code) < 500 else "Telegram limited character size",
+            result,
+            stats,
+        )
