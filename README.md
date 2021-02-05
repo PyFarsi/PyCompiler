@@ -6,7 +6,7 @@
 <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/PyFarsi/PyCompiler">
 </p>
 
-PyFarsi Telegram Bot Compiler python code, Used Rextester.com api.
+PyFarsi Telegram Bot Compiler, Used Rextester.com api.
 
 ## Contributing
 If you want to contribute to this project, read [Contributing Guide](CONTRIBUTING.md).
