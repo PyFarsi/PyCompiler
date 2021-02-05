@@ -12,7 +12,8 @@ class MetaSingleton(type):
 
 
 class Logger(metaclass=MetaSingleton):
-    def _write_file(self, type_log, msg: str):
+    @staticmethod
+    def _write_file(type_log, msg: str):
         if not os.path.exists('log'):
             os.mkdir('log')
         log_write = f'[{type_log}] [{str(datetime.datetime.now())}]: {msg}\n'
