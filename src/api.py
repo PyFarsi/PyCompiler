@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from requests import get
 
 STATS_ITEMS = (
@@ -58,6 +57,8 @@ class RextesterApi:
             lang = "PostgreSQL"
         elif lang_id == 24:
             lang = "Python 3"
+        elif lang_id == 20:
+            lang = "Go"
 
         if errors is not None:
             return self.__message(
