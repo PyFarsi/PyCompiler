@@ -50,6 +50,10 @@ def python3(bot, update):
     log.info("Python 3 Request.")
     bot.message.reply_text(msg)
 
+def golang(bot, update):
+    msg = "اوکی, لطفا کدی که به زبان Go هست را برایم بفرستید"
+    log.info("Golang Request.")
+    bot.message.reply_text(msg)
 
 def get_code(bot, update):
     msg = bot.message or bot.edited_message
@@ -106,6 +110,14 @@ def callback_result(message, code, msg_reply, cid, really_cid):
                 rex.rextester_api(24, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
+        
+        elif ("Go" in msg_reply
+              and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+              and "." not in msg_reply):
+            message.reply_text(
+                rex.rextester_api(20, code, cid, really_cid),
+                parse_mode=telegram.ParseMode.MARKDOWN,
+            )
 
 
 def get_settings():
@@ -146,5 +158,6 @@ if __name__ == "__main__":
     dp.add_handler(
         CommandHandler("sqlsv", sql_server, Filters.chat_type.groups))
     dp.add_handler(CommandHandler("psql", psql, Filters.chat_type.groups))
+    dp.add_handler(CommandHandler("go", golang, Filters.chat_type.groups))
     updater.start_polling()
     updater.idle()
