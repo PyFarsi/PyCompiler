@@ -16,13 +16,13 @@ log = Logger()
 
 
 def clang(bot, update):
-    msg = "اوکی, لطفا کدی که به زبان C هست را برایم بفرستید"
+    msg = "اوکی, لطفا کدی که به زبان CLang هست را برایم بفرستید"
     log.info("CLang Request.")
     bot.message.reply_text(msg)
 
 
 def cpplang(bot, update):
-    msg = "اوکی, لطفا کدی که به زبان ++C هست را برایم بفرستید"
+    msg = "اوکی, لطفا کدی که به زبان CPlusPlus هست را برایم بفرستید"
     log.info("C++ Request.")
     bot.message.reply_text(msg)
 
@@ -71,13 +71,13 @@ def callback_result(message, code, msg_reply, cid, really_cid):
         return
 
     if msg_reply:
-        if ("C" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+        if ("CLang" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
                 and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(6, code, cid, really_cid),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
-        elif ("C++" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+        elif ("CPlusPlus" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
               and "." not in msg_reply):
             message.reply_text(
                 rex.rextester_api(7, code, cid, really_cid),
