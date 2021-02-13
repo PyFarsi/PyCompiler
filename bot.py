@@ -68,6 +68,7 @@ def callback_result(message, code, msg_reply, cid, really_cid):
     if ("import os" in code and ("اوکی, لطفا کدی که به زبان" in msg_reply)
             and "." not in msg_reply):
         message.reply_text("استفاده از کتابخانه os مجاز نیست.")
+        return
 
     if msg_reply:
         if ("C" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
