@@ -10,8 +10,15 @@ STATS_ITEMS = (
     ("rows selected", "ردیف های انتخاب شده"),
     ("rows affected", "ردیف های تحت تاثیر"),
     ("sec", "ثانیه"),
+    ("absolute running time", "مدت زمان در حال اجرا"),
     (", ", "\n> "),
 )
+
+COMPILER_ARGS = {
+    "c": "-Wall -std=gnu99 -O2 -o a.out source_file.c",
+    "cpp": "-Wall -std=c++14 -O2 -o a.out source_file.cpp",
+    "go": "-o a.out source_file.go"
+}
 
 
 class RextesterApi:
@@ -25,7 +32,7 @@ class RextesterApi:
     def __message(interpreter: str, user: str, code: str, result: str,
                   stats: str) -> str:
         return f"""
-*زبان :* {interpreter}
+*زبان :* _{interpreter}_
 *کاربر :* {user}\n
 *کد ارسال شده :* \n
 `{code}`\n
@@ -33,12 +40,35 @@ class RextesterApi:
 `{result}`\n
 *منابع مصرف شده :* \n
 `{stats}`
+
+.
         """
 
     def rextester_api(self, lang_id: int, code: str, uid: str, username: str):
-        resp = get(
-            f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}&Program={code}"
-        ).json()
+        if lang_id == 6:
+            resp = get(
+                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
+                f"&Program={code}"
+                f"&CompilerArgs={COMPILER_ARGS['c']}"
+            ).json()
+        elif lang_id == 7:
+            resp = get(
+                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
+                f"&Program={code}"
+                f"&CompilerArgs={COMPILER_ARGS['cpp']} "
+            ).json()
+        elif lang_id == 20:
+            resp = get(
+                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
+                f"&Program={code}"
+                f"&CompilerArgs={COMPILER_ARGS['go']}"
+            ).json()
+        else:
+            resp = get(
+                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
+                f"&Program={code}"
+            ).json()
+
         """Response List"""
         errors = resp["Errors"]
         result = resp["Result"]
@@ -48,7 +78,7 @@ class RextesterApi:
         if lang_id == 6:
             lang = "C"
         elif lang_id == 7:
-            lang = "C++"
+            lang = "++C"
         elif lang_id == 33:
             lang = "MySQL"
         elif lang_id == 16:
