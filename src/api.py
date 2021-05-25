@@ -93,9 +93,12 @@ class RextesterApi:
                 data=data
             ).json()
         else:
+            data = DATA_TO_SEND
+            data['Program'] = code
+            data['LanguageChoiceWrapper'] = lang_id
             resp = post(
                 f"https://rextester.com/rundotnet/Run",
-                data=json.dumps({'LanguageChoiceWrapper': lang_id, 'Program': code})
+                data=data
             ).json()
 
         """Response List"""
