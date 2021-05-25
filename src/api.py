@@ -1,4 +1,5 @@
-from requests import get
+from requests import get, post
+import json
 
 STATS_ITEMS = (
     ("Absolute running time", "مدت زمان اجرا"),
@@ -20,7 +21,25 @@ COMPILER_ARGS = {
     "go": "-o a.out source_file.go"
 }
 
-
+DATA_TO_SEND = {
+            'LanguageChoiceWrapper': '',
+            'EditorChoiceWrapper': '1',
+            'LayoutChoiceWrapper': '1',
+            'Program': '',
+            'CompilerArgs': '',
+            'Input': '',
+            'ShowWarnings': 'false',
+            'Privacy': '',
+            'PrivacyUsers': '',
+            'Title': '',
+            'SavedOutput': '',
+            'WholeError': '',
+            'WholeWarning': '',
+            'StatsToSave': '',
+            'CodeGuid': '',
+            'IsInEditMode': 'False',
+            'IsLive': 'False'
+            }
 class RextesterApi:
     @staticmethod
     def __replace(code: str):
@@ -44,29 +63,39 @@ class RextesterApi:
 .
         """
 
+
     def rextester_api(self, lang_id: int, code: str, uid: str, username: str):
         if lang_id == 6:
-            resp = get(
-                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
-                f"&Program={code}"
-                f"&CompilerArgs={COMPILER_ARGS['c']}"
+            data = DATA_TO_SEND
+            data['Program'] = code
+            data['LanguageChoiceWrapper'] = lang_id
+            data['CompilerArgs'] = COMPILER_ARGS['c']
+            resp = post(
+                f"https://rextester.com/rundotnet/Run",
+                data=data
             ).json()
         elif lang_id == 7:
-            resp = get(
-                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
-                f"&Program={code}"
-                f"&CompilerArgs={COMPILER_ARGS['cpp']} "
+            data = DATA_TO_SEND
+            data['Program'] = code
+            data['LanguageChoiceWrapper'] = lang_id
+            data['CompilerArgs'] = COMPILER_ARGS['cpp']
+            resp = post(
+                f"https://rextester.com/rundotnet/Run",
+                data=data
             ).json()
         elif lang_id == 20:
-            resp = get(
-                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
-                f"&Program={code}"
-                f"&CompilerArgs={COMPILER_ARGS['go']}"
+            data = DATA_TO_SEND
+            data['Program'] = code
+            data['LanguageChoiceWrapper'] = lang_id
+            data['CompilerArgs'] = COMPILER_ARGS['go']
+            resp = post(
+                f"https://rextester.com/rundotnet/Run",
+                data=data
             ).json()
         else:
-            resp = get(
-                f"https://rextester.com/rundotnet/api?LanguageChoice={lang_id}"
-                f"&Program={code}"
+            resp = post(
+                f"https://rextester.com/rundotnet/Run",
+                data=json.dumps({'LanguageChoiceWrapper': lang_id, 'Program': code})
             ).json()
 
         """Response List"""
