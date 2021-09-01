@@ -70,7 +70,7 @@ def callback_result(message, code, msg_reply, cid, really_cid):
     
     if (securityCheck and ("اوکی, لطفا کدی که به زبان" in msg_reply)
             and "." not in msg_reply):
-        message.reply_text(f"کد شما مشکوک می باشد!")
+        message.reply_text(f"کتابخانه یا تابع استفاده شده در کد شما مجاز نیست!")
         return
 
     if msg_reply:
