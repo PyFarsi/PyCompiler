@@ -145,7 +145,7 @@ def securityCheck(code):
         if fm in code:
             return True
     
-    if "asyncio.subprocess" in code:
+    if "asyncio.subprocess" in code or "asyncio.create_subprocess_shell" in code:
         return True
     
     return False
