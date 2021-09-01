@@ -66,9 +66,7 @@ def get_code(bot, update):
 
 
 def callback_result(message, code, msg_reply, cid, really_cid):
-    securityCheck = findall(r"(exec\(.*\))|(eval\(.*\))|(__import__\(.*\))", code) or "import os" in code or "import sys" in code # RegEx test: https://regex101.com/r/AGjKzq/1
-    
-    if (securityCheck and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+    if (securityCheck(code) and ("اوکی, لطفا کدی که به زبان" in msg_reply)
             and "." not in msg_reply):
         message.reply_text(f"کتابخانه یا تابع استفاده شده در کد شما مجاز نیست!")
         return
@@ -134,8 +132,23 @@ def get_settings():
             "proxy": setting["proxy"],
             "proxy_address": setting["proxy_address"],
         }
-    raise Exception("setting.json not found.")
+    raise Exception("settings.json not found.")
 
+def securityCheck(code):
+    if findall(r"(exec\(.*\))|(eval\(.*\))", code):
+        return True
+    
+    filter_modules = ("os", "sys", "platform", "subprocess")
+    filter_codes = [f"import {m}" for m in filter_modules] + [f"from {m}" for m in filter_modules]
+    
+    for fm in filter_codes:
+        if fm in code:
+            return True
+    
+    if "asyncio.subprocess" in code:
+        return True
+    
+    return False
 
 if __name__ == "__main__":
     settings = get_settings()
