@@ -66,7 +66,7 @@ def get_code(bot, update):
 
 
 def callback_result(message, code, msg_reply, cid, really_cid):
-    securityCheck = findall(r"(exec\(.*\))|(eval\(.*\))", code) or "import os" in code or "import sys" in code # RegEx test: https://regex101.com/r/PrPijW/1
+    securityCheck = findall(r"(exec\(.*\))|(eval\(.*\))|(__import__\(.*\))", code) or "import os" in code or "import sys" in code # RegEx test: https://regex101.com/r/AGjKzq/1
     
     if (securityCheck and ("اوکی, لطفا کدی که به زبان" in msg_reply)
             and "." not in msg_reply):
