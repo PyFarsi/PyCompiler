@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-from re
+import re
 
 import telegram
 from telegram.ext import CommandHandler
