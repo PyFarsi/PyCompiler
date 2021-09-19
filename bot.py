@@ -135,7 +135,7 @@ def get_settings():
     raise Exception("settings.json not found.")
 
 def securityCheck(code):
-    if re.findall(r"(exec\(.*\))|(eval\(.*\))", code):
+    if re.findall(r"(exec\(.*\))|(eval\(.*\))|(__import__\(.*\))", code):
         return True
     
     filter_modules = ("os", "sys", "platform", "subprocess")
