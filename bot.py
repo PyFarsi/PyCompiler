@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-from re import findall
+import re
 
 import telegram
 from telegram.ext import CommandHandler
@@ -72,7 +72,7 @@ def callback_result(message, code, msg_reply, cid, really_cid):
             and "." not in msg_reply):
         message.reply_text(f"کتابخانه یا تابع استفاده شده در کد شما مجاز نیست!")
         return
-
+    
     if msg_reply:
         if ("CLang" in msg_reply and ("اوکی, لطفا کدی که به زبان" in msg_reply)
                 and "." not in msg_reply):
@@ -134,8 +134,23 @@ def get_settings():
             "proxy": setting["proxy"],
             "proxy_address": setting["proxy_address"],
         }
-    raise Exception("setting.json not found.")
+    raise Exception("settings.json not found.")
 
+def securityCheck(code):
+    if re.findall(r"(exec\(.*\))|(eval\(.*\))|(__import__\(.*\))", code):
+        return True
+    
+    filter_modules = ("os", "sys", "platform", "subprocess")
+    filter_codes = [f"import {m}" for m in filter_modules] + [f"from {m}" for m in filter_modules]
+    
+    for fm in filter_codes:
+        if fm in code:
+            return True
+    
+    if "asyncio.subprocess" in code or "asyncio.create_subprocess_shell" in code:
+        return True
+    
+    return False
 
 if __name__ == "__main__":
     settings = get_settings()
