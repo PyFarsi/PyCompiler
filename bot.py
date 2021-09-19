@@ -66,9 +66,7 @@ def get_code(bot, update):
 
 
 def callback_result(message, code, msg_reply, cid, really_cid):
-    securityCheck = re.findall(r"(exec\(.*\))|(eval\(.*\))", code) or "import os" in code or "import sys" in code # RegEx test: https://regex101.com/r/PrPijW/1
-    
-    if (securityCheck and ("اوکی, لطفا کدی که به زبان" in msg_reply)
+    if (securityCheck(code) and ("اوکی, لطفا کدی که به زبان" in msg_reply)
             and "." not in msg_reply):
         message.reply_text(f"کتابخانه یا تابع استفاده شده در کد شما مجاز نیست!")
         return
@@ -147,7 +145,7 @@ def securityCheck(code):
         if fm in code:
             return True
     
-    if "asyncio.subprocess" in code or "asyncio.create_subprocess_shell" in code:
+    if "subprocess" in code or "create_subprocess_shell" in code:
         return True
     
     return False
