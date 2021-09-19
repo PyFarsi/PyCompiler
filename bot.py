@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-from re import findall
+from re
 
 import telegram
 from telegram.ext import CommandHandler
@@ -135,7 +135,7 @@ def get_settings():
     raise Exception("settings.json not found.")
 
 def securityCheck(code):
-    if findall(r"(exec\(.*\))|(eval\(.*\))", code):
+    if re.findall(r"(exec\(.*\))|(eval\(.*\))", code):
         return True
     
     filter_modules = ("os", "sys", "platform", "subprocess")
