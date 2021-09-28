@@ -4,6 +4,7 @@
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/PyFarsi/PyCompiler">
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/PyFarsi/PyCompiler">
 <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/PyFarsi/PyCompiler">
+  <img alt="Code Factor" src="https://www.codefactor.io/repository/github/ja7ad/pycompiler/badge">
 </p>
 
 PyFarsi Telegram Bot Compiler, Used Rextester.com api.
