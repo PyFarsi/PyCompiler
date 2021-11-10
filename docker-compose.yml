@@ -1,0 +1,8 @@
+version: "2"
+services:
+  bot:
+    build: .
+    restart: always
+    command: python3 bot.py
+    volumes:
+      - .:/app
