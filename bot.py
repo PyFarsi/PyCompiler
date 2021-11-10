@@ -19,42 +19,42 @@ log = Logger()
 def clang(bot, update):
     msg = "اوکی, لطفا کدی که به زبان CLang هست را برایم بفرستید"
     log.info("CLang Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا کد زبان C خود را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 
 def cpplang(bot, update):
     msg = "اوکی, لطفا کدی که به زبان CPlusPlus هست را برایم بفرستید"
     log.info("C++ Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا کد زبان C++ خود را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 
 def mysql(bot, update):
     msg = "اوکی, لطفا کدی که به زبان MySQL هست را برایم بفرستید"
     log.info("MySQL Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا دستورات MySql را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 
 def sql_server(bot, update):
     msg = "اوکی, لطفا کدی که به زبان SQL Server هست را برایم بفرستید"
     log.info("SQL Server Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا دستورات SQL Server خود را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 
 def psql(bot, update):
     msg = "اوکی, لطفا کدی که به زبان PostgreSQL هست را برایم بفرستید"
     log.info("PostgreSQL Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا دستورات PostgreSql خود را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 
 def python3(bot, update):
     msg = "اوکی, لطفا کدی که به زبان Python 3 هست را برایم بفرستید"
     log.info("Python 3 Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا کد زبان Python 3 خود را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 def golang(bot, update):
     msg = "اوکی, لطفا کدی که به زبان Go هست را برایم بفرستید"
     log.info("Golang Request.")
-    bot.message.reply_text(msg, reply_markup=telegram.ForceReply(input_field_placeholder="لطفا کد زبان Go خود را بنویسید و ارسال کنید"))
+    bot.message.reply_text(msg)
 
 def get_code(bot, update):
     msg = bot.message or bot.edited_message
